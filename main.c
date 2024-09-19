@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <curl/curl.h>
 
 int main(void) {
@@ -11,15 +10,21 @@ int main(void) {
         printf("Curl initialized\n");
         curl_easy_setopt(curl, CURLOPT_URL, "https://guildofstudents.com");
 
-        CURLcode response = curl_easy_perform(curl);
+        const CURLcode response = curl_easy_perform(curl);
 
         if (response != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(response));
-            curl_easy_cleanup(curl);
+            printf("Something went wrong!!\n");
+            printf("curl_easy_perform() failed: %s\n", curl_easy_strerror(response));
         } else {
-            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response);
+            printf("Everything went okay!!\n");
+            // TODO: idk print somet I guess
         }
         curl_easy_cleanup(curl);
     }
     curl_global_cleanup();
 }
+
+// TODO: New method to take in the curl session, make a request and extract the society name if present
+
+
+
